@@ -26,7 +26,6 @@ resource "aws_iam_role_policy_attachment" "a3" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-
 resource "aws_iam_instance_profile" "iip" {
   name_prefix = "${var.alias}"
   role        = aws_iam_role.role.id
