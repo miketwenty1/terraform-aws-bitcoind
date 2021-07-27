@@ -18,7 +18,7 @@ module "bitcoind" {
 }
 ```
 
-### Notes: for a full list of configurable parameters please see variables.tf
+### Notable parameters: for a full list of configurable parameters please see variables.tf
 - `subnet_id` if using public subnet also set "enable_external_ip" to true, if using a private subnet (recommended) keep set to false.
 - `enable_external_ip` set to true if you want an external IP. If not set to true, you will need to use a jump box / vpn or other method to access your node.
 - `sg_for_ssh_access_id` should be used if you want to setup vpn or jumpbox access.
@@ -27,10 +27,10 @@ module "bitcoind" {
 - `bitcoin_version` uses a tagged version of bitcoind in github.com/bitcoin/bitcoin
 
 ### Mandatory parameters:
-- subnet_id (valid subnet id inside VPC with appropriate tag)
-- ssh_key_name (ssh key)
-- region (aws region)
-- rpc_access_cidr (cidr block ex: 0.0.0.0/0 is open to the internet, 1.2.3.4/32 is open to only ip 1.2.3.4)
+- `subnet_id` (valid subnet id inside VPC with appropriate tag)
+- `ssh_key_name` (ssh key)
+- `region` (aws region)
+- `rpc_access_cidr` (cidr block ex: 0.0.0.0/0 is open to the internet, 1.2.3.4/32 is open to only ip 1.2.3.4)
 
 ### Dependencies: 
 Have a VPC tagged with "key" `bitcoin_terraform` and "Value" `enabled`, This module will look to deploy the bitcoin node in this VPC.
