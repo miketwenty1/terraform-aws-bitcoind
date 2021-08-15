@@ -50,7 +50,7 @@ variable "root_volume_size" {
 }
 variable "bitcoin_volume_size" {
   type    = number
-  default = 600
+  default = 800
 }
 
 variable "rpc_user" {
