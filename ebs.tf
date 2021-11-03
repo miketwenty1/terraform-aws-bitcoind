@@ -2,7 +2,7 @@ resource "aws_ebs_volume" "v" {
   availability_zone = "${var.region}${var.az_letter}"
   size              = var.bitcoin_volume_size
 
-  tags = merge(local.common_tags,tomap(
+  tags = merge(local.common_tags, tomap(
     { Name = "${var.env}_${var.alias}_volume" }
   ))
 }

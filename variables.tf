@@ -27,7 +27,7 @@ locals {
 
 # https://github.com/bitcoin-core/gitian.sigs for good hashes of builds for the bitcoin-VERSION-x86_64-linux-gnu.tar.gz
 variable "gitian_hash" {
-  type    = map(string)
+  type = map(string)
   default = {
     v0-20-1 = "376194f06596ecfa40331167c39bc70c355f960280bd2a645fdbf18f66527397"
     v0-21-0 = "da7766775e3f9c98d7a9145429f2be8297c2672fe5b118fd3dc2411fb48e0032"
@@ -36,7 +36,7 @@ variable "gitian_hash" {
 }
 
 variable "gitian_pgp_key" {
-  type = string
+  type    = string
   default = "01EA5486DE18A882D4C2684590C8019E36C2E964" #laanwj@gmail.com
 }
 variable "az_letter" {
@@ -76,7 +76,7 @@ variable "cidr_block_ssh_access_rule" {
 }
 
 # if blank no rule is made for ssh sourced access to another sg 
-variable "sg_for_ssh_access_id" { 
+variable "sg_for_ssh_access_id" {
   type    = string
   default = ""
 }
