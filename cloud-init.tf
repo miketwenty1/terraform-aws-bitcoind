@@ -12,10 +12,10 @@ data "template_file" "shell-script" {
   template = file("${path.module}/cloud-init.sh")
 
   vars = {
-    VERSION         = var.bitcoin_version
-    GITIAN_HASH     = lookup(var.gitian_hash,"v${replace(var.bitcoin_version,".","-")}", "this version not defined")
-    GITIAN_PGP_KEY  = var.gitian_pgp_key
-    REGION          = var.region
+    VERSION        = var.bitcoin_version
+    GITIAN_HASH    = lookup(var.gitian_hash, "v${replace(var.bitcoin_version, ".", "-")}", "this version not defined")
+    GITIAN_PGP_KEY = var.gitian_pgp_key
+    REGION         = var.region
   }
 }
 
