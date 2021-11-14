@@ -9,7 +9,7 @@ resource "aws_instance" "i" {
   iam_instance_profile    = aws_iam_instance_profile.iip.id
 
   root_block_device {
-    volume_type = "gp2"
+    volume_type = "gp3"
     volume_size = var.root_volume_size
   }
 
