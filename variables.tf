@@ -67,7 +67,7 @@ variable "instance_size" {
 
 variable "bitcoin_version" {
   type    = string
-  default = "v22.0"
+  default = "22.0"
 }
 
 # if blank there is no rule made for ssh with a cidr range
