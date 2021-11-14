@@ -32,6 +32,7 @@ variable "gitian_hash" {
     v0-20-1 = "376194f06596ecfa40331167c39bc70c355f960280bd2a645fdbf18f66527397"
     v0-21-0 = "da7766775e3f9c98d7a9145429f2be8297c2672fe5b118fd3dc2411fb48e0032"
     v0-21-1 = "366eb44a7a0aa5bd342deea215ec19a184a11f2ca22220304ebb20b9c8917e2b"
+    v22-0   = "d0e9d089b57048b1555efa7cd5a63a7ed042482045f6f33402b1df425bf9613b"
   }
 }
 
@@ -66,7 +67,7 @@ variable "instance_size" {
 
 variable "bitcoin_version" {
   type    = string
-  default = "0.21.1"
+  default = "v22.0"
 }
 
 # if blank there is no rule made for ssh with a cidr range
