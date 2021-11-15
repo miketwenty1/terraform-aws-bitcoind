@@ -62,7 +62,7 @@ gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys ${GITIAN_PGP_KEY} # laanw
 
 echo "first bitcoin integrity check" >> /tmp/cloudinit
 wget https://bitcoincore.org/bin/bitcoin-core-${VERSION}/SHA256SUMS
-sha256sum --check SHA256SUMS.asc | grep OK
+sha256sum --check SHA256SUMS | grep OK
 if [ $? -eq 0 ]; then
     echo "hash checks out from bitcoincore.org." >> /tmp/cloudinit
 else
