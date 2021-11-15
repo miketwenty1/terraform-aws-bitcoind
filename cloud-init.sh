@@ -35,16 +35,16 @@ fi
 mkdir -m 770 /bitcoind
 
 
-echo check ebs bitcoind disk device
+echo "check ebs bitcoind disk device" >> /tmp/cloudinit
 fdisk -l | grep /dev | tail -1 > /bitcoind/disk_info.txt
-echo grab disk specific
+echo "grab disk specific" >> /tmp/cloudinit
 cat /bitcoind/disk_info.txt | cut -d'/' -f3 | cut -d':' -f1 > /bitcoind/specific_disk.txt
 export DISK=/dev/`cat /bitcoind/specific_disk.txt`
 file -s $DISK > /bitcoind/starting_fs_ebs.txt
 
 # format ebs if it isn't already xfs
 if grep -q ": data$" "/bitcoind/starting_fs_ebs.txt"; then
-  echo found data device creating xfs fs on $DISK
+  echo "found data device creating xfs fs on $DISK" >> /tmp/cloudinit
   mkfs -t xfs $DISK
 fi
 
@@ -60,23 +60,23 @@ tar -xvf bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz
 gpg --keyserver hkp://keyserver.ubuntu.com --refresh-keys
 gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys ${GITIAN_PGP_KEY} # laanwj@gmail.com
 
-echo "first bitcoin integrity check"
-wget https://bitcoincore.org/bin/bitcoin-core-${VERSION}/SHA256SUMS.asc
+echo "first bitcoin integrity check" >> /tmp/cloudinit
+wget https://bitcoincore.org/bin/bitcoin-core-${VERSION}/SHA256SUMS
 sha256sum --check SHA256SUMS.asc | grep OK
 if [ $? -eq 0 ]; then
-    echo signature checks out from bitcoincore.org.
+    echo "hash checks out from bitcoincore.org." >> /tmp/cloudinit
 else
-    echo "signature or hash doesn't match for bitcoin ${VERSION} linux 86x-64"
+    echo "hash doesn't match for bitcoin ${VERSION} linux 86x-64" >> /tmp/cloudinit
     exit 1
 fi
 
-echo "second bitcoin integrity check"
+echo "second bitcoin integrity check - our own hash check" >> /tmp/cloudinit
 echo "${GITIAN_HASH} /bitcoind/bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz" | sha256sum -c -
 
 if [ $? -eq 0 ]; then
-    echo bitcoind checks out from hash.
+    echo bitcoind checks out from hash. >> /tmp/cloudinit
 else
-    echo "Hash is incorrect for this version of bitcoin linux 86x-64"
+    echo "Hash is incorrect for this version of bitcoin linux 86x-64" >> /tmp/cloudinit
     exit 1
 fi
 
@@ -106,10 +106,10 @@ mv /tmp/bitcoin.conf /home/bitcoiner/.bitcoin/
 # check for bitcoin.conf
 FILE=/home/bitcoiner/.bitcoin/bitcoin.conf
 if [ -f "$FILE" ]; then
-    echo "$FILE exists."
+    echo "$FILE exists." >> /tmp/cloudinit
     chown -R bitcoiner:bitcoin $FILE
 else 
-    echo "$FILE does not exist."
+    echo "$FILE does not exist." >> /tmp/cloudinit
     exit 1
 fi
 
