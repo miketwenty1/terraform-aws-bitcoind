@@ -70,7 +70,7 @@ else
     exit 1
 fi
 
-echo "second bitcoin integrity check - our own hash check" >> /tmp/cloudinit
+echo "second bitcoin ${GITIAN_HASH} integrity check - our own hash check" >> /tmp/cloudinit
 echo "${GITIAN_HASH} /bitcoind/bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz" | sha256sum -c -
 
 if [ $? -eq 0 ]; then
