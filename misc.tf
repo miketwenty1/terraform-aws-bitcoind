@@ -10,5 +10,5 @@ resource "random_password" "rpc" {
   length  = 21
   special = false
   upper   = true
-  number  = true
+  numeric  = true
 }
